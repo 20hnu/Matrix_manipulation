@@ -28,8 +28,15 @@ class Matrix:
                 result[i][j] = self.data[i][j] - other.data[i][j]
         return Matrix(result)
 
-    def __matmul__(self, other):
-        pass
+    def __mul__(self, other):
+        if self.cols != other.rows:
+            raise ValueError("Matrix dimension must match for multiplication")
+        result = [[0 for _ in range(self.rows)]  for _ in range(other.cols)]
+        for i in range(self.rows):
+            for j in range(other.cols):
+                for k in range(self.cols):
+                    result[i][j] += self.data[i][k] * other.data[k][j]
+        return Matrix(result)
 
 
     def transpose(self):
@@ -41,10 +48,13 @@ class Matrix:
 
     def determinant(self):
         pass
-    
-A = Matrix([[1,2,3], [5,4,8],[6,8,9]])
-B = Matrix([[5, 6], [7, 8]])
-# print(A)
-# print(B)
-# print(A+B)
-print(A.transpose())
+
+
+if __name__ == "__main__":
+    A = Matrix([[1,2,3], [5,4,8]])
+    B = Matrix([[5, 6], [7, 8],[4,0]])
+    # print(A)
+    # print(B)
+    # print(A+B)
+    # print(A.transpose())
+    print(A*B)
