@@ -13,7 +13,7 @@ This repository contains Python implementations for matrix manipulations and fra
 - **Subtraction (`-`)**: Subtracts one matrix from another.
 - **Multiplication (`*`)**: Performs matrix multiplication if dimensions match.
 - **Transpose (`transpose()`)**: Returns the transpose of a matrix.
-- **Determinant (`determinant()`)**: (To be implemented)
+- **Determinant (`determinant()`)**: Returns the determinant of any square matrix
 
 #### Example Usage
 ```python

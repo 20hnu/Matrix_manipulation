@@ -45,16 +45,30 @@ class Matrix:
             for j in range(self.rows):
                 result[i][j] = self.data[j][i]
         return Matrix(result)
-
+    
     def determinant(self):
-        pass
-
+            if self.rows != self.cols:
+                raise ValueError("Matrix should be square to calculate determinant") 
+            return self._recursive_determinant(self.data)
+            
+    def _recursive_determinant(self, matrix):
+            if len(matrix) ==1:
+                return matrix[0][0]
+                
+            if len(matrix) == 2:
+                return matrix[0][0] * matrix[1][1] - matrix[0][1]*matrix[1][0]
+            det =0
+            for c in range(len(matrix)):
+                sub_matrix = [row[:c] + row[c+1:] for row in matrix[1:]]
+                det += ((-1) ** c) * matrix[0][c] * self._recursive_determinant(sub_matrix)
+                
+            return det
 
 if __name__ == "__main__":
-    A = Matrix([[1,2,3], [5,4,8]])
-    B = Matrix([[5, 6], [7, 8],[4,0]])
-    # print(A)
-    # print(B)
-    # print(A+B)
-    # print(A.transpose())
-    print(A*B)
+    A = Matrix([[1,2], [5,4]])
+    B = Matrix([[5, 6,3], [7, 8,1],[4,0,7]])
+    print(A)
+    print(B)
+    print(A.transpose())
+    print(A.determinant())
+    print(B.determinant())
